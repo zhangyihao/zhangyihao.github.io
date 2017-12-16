@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="The “Double-Checked Locking is Broken” DeclarationDouble-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment. Unfortunat">
+<meta name="description" content="Double-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment. Unfortunately, it will not work reliably in a platform indep">
 <meta name="keywords" content="double-checked Locking">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(转)The Double-Checked Locking is Broken Declaration">
 <meta property="og:url" content="http://zhangyida.cn/2017/02/16/Double-Checkd Locking is Broken/index.html">
 <meta property="og:site_name" content="zhangyida">
-<meta property="og:description" content="The “Double-Checked Locking is Broken” DeclarationDouble-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment. Unfortunat">
+<meta property="og:description" content="Double-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment. Unfortunately, it will not work reliably in a platform indep">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-16T13:25:10.000Z">
+<meta property="og:updated_time" content="2017-12-16T13:26:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(转)The Double-Checked Locking is Broken Declaration">
-<meta name="twitter:description" content="The “Double-Checked Locking is Broken” DeclarationDouble-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment. Unfortunat">
+<meta name="twitter:description" content="Double-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment. Unfortunately, it will not work reliably in a platform indep">
 
 
 
@@ -370,7 +370,7 @@
       
 
       
-        <h1 id="The-“Double-Checked-Locking-is-Broken”-Declaration"><a href="#The-“Double-Checked-Locking-is-Broken”-Declaration" class="headerlink" title="The “Double-Checked Locking is Broken” Declaration"></a>The “Double-Checked Locking is Broken” Declaration</h1><p>Double-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment.</p>
+        <p>Double-Checked Locking is widely cited and used as an efficient method for implementing lazy initialization in a multithreaded environment.</p>
 <p>Unfortunately, it will not work reliably in a platform independent way when implemented in Java, without additional synchronization. When implemented in other languages, such as C++, it depends on the memory model of the processor, the reorderings performed by the compiler and the interaction between the compiler and the synchronization library. Since none of these are specified in a language such as C++, little can be said about the situations in which it will work. Explicit memory barriers can be used to make it work in C++, but these barriers are not available in Java.</p>
 <a id="more"></a>
 <p>To first explain the desired behavior, consider the following code:</p>
@@ -557,7 +557,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -605,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-“Double-Checked-Locking-is-Broken”-Declaration"><span class="nav-number">1.</span> <span class="nav-text">The “Double-Checked Locking is Broken” Declaration</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#It-doesn’t-work"><span class="nav-number">1.1.</span> <span class="nav-text">It doesn’t work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-first-reason-it-doesn’t-work"><span class="nav-number">1.1.1.</span> <span class="nav-text">The first reason it doesn’t work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-test-case-showing-that-it-doesn’t-work"><span class="nav-number">1.1.2.</span> <span class="nav-text">A test case showing that it doesn’t work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-fix-doesn’t-work"><span class="nav-number">1.1.3.</span> <span class="nav-text">A fix doesn’t work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-fixes-that-don’t-work"><span class="nav-number">1.1.4.</span> <span class="nav-text">More fixes that don’t work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Is-it-worth-the-trouble"><span class="nav-number">1.2.</span> <span class="nav-text">Is it worth the trouble?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Making-it-work-for-static-singletons"><span class="nav-number">1.3.</span> <span class="nav-text">Making it work for static singletons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#It-will-work-for-32-bit-primitive-values"><span class="nav-number">1.4.</span> <span class="nav-text">It will work for 32-bit primitive values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Making-it-work-with-explicit-memory-barriers"><span class="nav-number">1.5.</span> <span class="nav-text">Making it work with explicit memory barriers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fixing-Double-Checked-Locking-using-Thread-Local-Storage"><span class="nav-number">1.6.</span> <span class="nav-text">Fixing Double-Checked Locking using Thread Local Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Under-the-new-Java-Memory-Model"><span class="nav-number">1.7.</span> <span class="nav-text">Under the new Java Memory Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fixing-Double-Checked-Locking-using-Volatile"><span class="nav-number">1.7.1.</span> <span class="nav-text">Fixing Double-Checked Locking using Volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Double-Checked-Locking-Immutable-Objects"><span class="nav-number">1.7.2.</span> <span class="nav-text">Double-Checked Locking Immutable Objects</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#It-doesn’t-work"><span class="nav-number">1.</span> <span class="nav-text">It doesn’t work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-first-reason-it-doesn’t-work"><span class="nav-number">1.1.</span> <span class="nav-text">The first reason it doesn’t work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-test-case-showing-that-it-doesn’t-work"><span class="nav-number">1.2.</span> <span class="nav-text">A test case showing that it doesn’t work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-fix-doesn’t-work"><span class="nav-number">1.3.</span> <span class="nav-text">A fix doesn’t work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-fixes-that-don’t-work"><span class="nav-number">1.4.</span> <span class="nav-text">More fixes that don’t work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Is-it-worth-the-trouble"><span class="nav-number">2.</span> <span class="nav-text">Is it worth the trouble?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Making-it-work-for-static-singletons"><span class="nav-number">3.</span> <span class="nav-text">Making it work for static singletons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#It-will-work-for-32-bit-primitive-values"><span class="nav-number">4.</span> <span class="nav-text">It will work for 32-bit primitive values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Making-it-work-with-explicit-memory-barriers"><span class="nav-number">5.</span> <span class="nav-text">Making it work with explicit memory barriers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fixing-Double-Checked-Locking-using-Thread-Local-Storage"><span class="nav-number">6.</span> <span class="nav-text">Fixing Double-Checked Locking using Thread Local Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Under-the-new-Java-Memory-Model"><span class="nav-number">7.</span> <span class="nav-text">Under the new Java Memory Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fixing-Double-Checked-Locking-using-Volatile"><span class="nav-number">7.1.</span> <span class="nav-text">Fixing Double-Checked Locking using Volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Double-Checked-Locking-Immutable-Objects"><span class="nav-number">7.2.</span> <span class="nav-text">Double-Checked Locking Immutable Objects</span></a></li></ol></li></ol></div>
             
 
           </div>
