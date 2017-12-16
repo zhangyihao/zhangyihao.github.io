@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。 什么是双向认证？简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。详细过程为：  客户端向服务端发送SSL协议版本号、加密算法种类、随机数等信息。 服务端给客户端返回SSL协议版本号、加密算法种类、随机数等信息，同时也返回服务器端的证书，即公钥证书 客户端使用服务端返回的信息验证服务器的合法性">
+<meta name="description" content="在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。 什么是双向认证？简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。详细过程为：">
 <meta name="keywords" content="Android,双向认证">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android HTTPS 双向认证实现">
 <meta property="og:url" content="http://zhangyida.cn/2017/12/13/Android-HTTPS-双向认证实现/index.html">
 <meta property="og:site_name" content="zhangyida">
-<meta property="og:description" content="在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。 什么是双向认证？简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。详细过程为：  客户端向服务端发送SSL协议版本号、加密算法种类、随机数等信息。 服务端给客户端返回SSL协议版本号、加密算法种类、随机数等信息，同时也返回服务器端的证书，即公钥证书 客户端使用服务端返回的信息验证服务器的合法性">
+<meta property="og:description" content="在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。 什么是双向认证？简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。详细过程为：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-13T14:33:02.000Z">
+<meta property="og:updated_time" content="2017-12-16T13:23:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android HTTPS 双向认证实现">
-<meta name="twitter:description" content="在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。 什么是双向认证？简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。详细过程为：  客户端向服务端发送SSL协议版本号、加密算法种类、随机数等信息。 服务端给客户端返回SSL协议版本号、加密算法种类、随机数等信息，同时也返回服务器端的证书，即公钥证书 客户端使用服务端返回的信息验证服务器的合法性">
+<meta name="twitter:description" content="在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。 什么是双向认证？简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。详细过程为：">
 
 
 
@@ -114,7 +114,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -175,7 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -371,7 +371,7 @@
 
       
         <p>在做项目的过程中，碰到了App需要使用双向认证的问题，记录下解决方法。</p>
-<h2 id="什么是双向认证？"><a href="#什么是双向认证？" class="headerlink" title="什么是双向认证？"></a>什么是双向认证？</h2><p>简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。<br>详细过程为：</p>
+<h2 id="什么是双向认证？"><a href="#什么是双向认证？" class="headerlink" title="什么是双向认证？"></a>什么是双向认证？</h2><p>简单来说，在一次请求中，客户端需要校验服务端证书合法性，服务端同时校验客户端合法性。<br>详细过程为：<br><a id="more"></a></p>
 <ol>
 <li>客户端向服务端发送SSL协议版本号、加密算法种类、随机数等信息。</li>
 <li>服务端给客户端返回SSL协议版本号、加密算法种类、随机数等信息，同时也返回服务器端的证书，即公钥证书</li>
@@ -392,7 +392,6 @@
 <li>服务端收到客户端发送的消息后，使用自己的私钥进行解密，获取对称加密的密钥，在接下来的会话中，服务器和客户端将会使用该密码进行对称加密，保证通信过程中信息的安全。</li>
 </ol>
 <p>除了双向认证，还有单向认证，具体可参考文末连接。</p>
-<a id="more"></a>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
 <li>项目部署结构：<ul>
 <li>客户端：Android App</li>
@@ -547,7 +546,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -558,7 +557,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -569,7 +568,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
