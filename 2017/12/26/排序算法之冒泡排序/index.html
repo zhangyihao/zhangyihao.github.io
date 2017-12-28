@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="zhangyida">
 <meta property="og:description" content="冒泡排序是一种稳定排序，时间复杂度为O(n^2)。 排序思想依次交换相邻两个元素，使得大的数据往下沉（或小的数据往上附浮）。 排序过程 比较相邻的两个元素，如果前者比后者大，则交换两元素。否则，不交换。 重复第一步直到最后两个元素比较完成，此时，最大的元素已经在最后面了，此趟排序完成。 去除最后元素，重复上述两步，对最后元素之前的数据进行排序。 每趟排序完成后，大的数据会往下沉，也就是需要排序的数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-28T01:30:25.000Z">
+<meta property="og:updated_time" content="2017-12-28T02:15:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法之冒泡排序">
 <meta name="twitter:description" content="冒泡排序是一种稳定排序，时间复杂度为O(n^2)。 排序思想依次交换相邻两个元素，使得大的数据往下沉（或小的数据往上附浮）。 排序过程 比较相邻的两个元素，如果前者比后者大，则交换两元素。否则，不交换。 重复第一步直到最后两个元素比较完成，此时，最大的元素已经在最后面了，此趟排序完成。 去除最后元素，重复上述两步，对最后元素之前的数据进行排序。 每趟排序完成后，大的数据会往下沉，也就是需要排序的数">
@@ -380,7 +380,7 @@
 </ol>
 <a id="more"></a>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//大数下沉</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</div><div class="line">	<span class="comment">//控制总共循环次数</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=array.length; i++) &#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;array.length-i; j++) &#123;</div><div class="line">			<span class="keyword">if</span>(array[j] &gt; array[j+<span class="number">1</span>]) &#123;</div><div class="line">				<span class="keyword">int</span> temp = array[j+<span class="number">1</span>];</div><div class="line">				array[j+<span class="number">1</span>] = array[j];</div><div class="line">				array[j] = temp;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"第"</span>+i+<span class="string">"趟排序结果："</span>+Arrays.toString(array));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//小数上浮</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort2</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=array.length; i++) &#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=array.length-<span class="number">1</span>; j&gt;=i; j--) &#123;</div><div class="line">			<span class="keyword">if</span>(array[j] &lt;= array[j-<span class="number">1</span>]) &#123;</div><div class="line">				<span class="keyword">int</span> temp = array[j-<span class="number">1</span>];</div><div class="line">				array[j-<span class="number">1</span>] = array[j];</div><div class="line">				array[j] = temp;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"第"</span>+i+<span class="string">"趟排序结果："</span>+Arrays.toString(array));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>代码地址：<a href="https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/sort/BubbleSort.java" target="_blank" rel="external">https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/sort/BubbleSort.java</a></p>
+<p>代码地址：<br><a href="https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/sort/BubbleSort.java" target="_blank" rel="external">https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/sort/BubbleSort.java</a></p>
 
       
     </div>
@@ -424,6 +424,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/27/剑指offer读书笔记-二维数组查找问题/" rel="prev" title="剑指offer读书笔记-二维数组查找问题">
+                剑指offer读书笔记-二维数组查找问题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -496,7 +500,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -518,7 +522,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -588,7 +592,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2015 - 
+  &copy; 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
