@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,排序," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="基本思想在一趟排序过程中，选择一个基准值，通过交换的方式将待排序序列分为两个序列。其中一个序列在基准值左侧，这部分中所有数值都小于基准值；另一序列在基准值右侧，这部分中所有数值都大于基准值。然后对分割出的两个序列重复上述过程，直到排序结束。">
+<meta name="keywords" content="算法,排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法之快速排序">
+<meta property="og:url" content="http://zhangyida.cn/2017/12/29/排序算法之快速排序/index.html">
+<meta property="og:site_name" content="zhangyida">
+<meta property="og:description" content="基本思想在一趟排序过程中，选择一个基准值，通过交换的方式将待排序序列分为两个序列。其中一个序列在基准值左侧，这部分中所有数值都小于基准值；另一序列在基准值右侧，这部分中所有数值都大于基准值。然后对分割出的两个序列重复上述过程，直到排序结束。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-31T14:04:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序算法之快速排序">
+<meta name="twitter:description" content="基本思想在一趟排序过程中，选择一个基准值，通过交换的方式将待排序序列分为两个序列。其中一个序列在基准值左侧，这部分中所有数值都小于基准值；另一序列在基准值右侧，这部分中所有数值都大于基准值。然后对分割出的两个序列重复上述过程，直到排序结束。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyida.cn/2017/12/29/排序算法之快速排序/"/>
+
+
+
+
+
+  <title>排序算法之快速排序 | zhangyida</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7ad91abbabdfc7e710d2db6b864aea29";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangyida</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyida.cn/2017/12/29/排序算法之快速排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyida">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangyida">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">排序算法之快速排序</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T10:56:34+08:00">
+                2017-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h1><p>在一趟排序过程中，选择一个基准值，通过交换的方式将待排序序列分为两个序列。其中一个序列在基准值左侧，这部分中所有数值都小于基准值；另一序列在基准值右侧，这部分中所有数值都大于基准值。然后对分割出的两个序列重复上述过程，直到排序结束。</p>
+<a id="more"></a>
+<h1 id="详细排序步骤"><a href="#详细排序步骤" class="headerlink" title="详细排序步骤"></a>详细排序步骤</h1><ul>
+<li>第一步：从待排序序列选取一个基准值（一般为待排序列的首元素）并记录，使得 i , j 分别指向待排序序列首元素和最后一个元素。</li>
+<li>第二步：从待排序序列右侧开始，比较 j 指向的元素和基准值的大小，如果大于基准值，j 向前移动一个元素，直到找到一个比基准值小的元素，停止 j 的移动。此时, 将 j 所指向的元素赋值给i所指向的元素，并让 i 向后移动一个元素。</li>
+<li>第三步：从待排序序列左侧开始，比较 i 指向的元素和基准值的大小，如果小于基准值，i 向后移动一个元素，直到找到一个比基准值大的元素，停止 i 的移动。此时, 将 i 所指向的元素赋值给 j 所指向的元素，并让 j 向前移动一个元素。</li>
+<li>第四步：重复上述步骤，直到 i 和 j 指向同一个元素，然后将基准值赋值给 i 和 j 所指向的元素。此时，序列已经被基准值分为两部分，左侧所有元素小于基准值，右侧所有的元素大于基准值。</li>
+<li>第五步：使用相同方法，对基准值两侧的序列分别进行排序。</li>
+</ul>
+<h1 id="排序示例"><a href="#排序示例" class="headerlink" title="排序示例"></a>排序示例</h1><p>假设，对序列{3, 4, 63, 4, 0, 1, 32, -2, 21}进行排序。</p>
+<p>第1步：选取基准值为3（序列首元素），此时，i=0，j=8。</p>
+<p>第2步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列右侧开始向左逐渐移动 j 直到找到一个比3小的元素即-2，此时i=0, j=7。<br>&nbsp;&nbsp;&nbsp;&nbsp;然后把 j 指向的元素赋值到 i 所在位置，此时序列变为：{<strong>-2</strong>, 4, 63, 4, 0, 1, 32, <strong><em>-2</em></strong>, 21}。</p>
+<p>第3步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列左侧开始向右逐渐移动 i 直到找到一个比3大的元素即4，此时i=1, j=7。<br>&nbsp;&nbsp;&nbsp;&nbsp;然后把 i 指向元素赋值到 j 所在位置，此时序列变为：{-2, <strong>4</strong>, 63, 4, 0, 1, 32, <strong><em>4</em></strong>, 21}。</p>
+<p>第4步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列右侧开始向左逐渐移动 j 直到找到一个比3小的元素即1， 此时i=1, j=5。<br>&nbsp;&nbsp;&nbsp;&nbsp;然后把 j 指向元素赋值到 i 所在位置，此时序列变为：{-2, <strong>1</strong>, 63, 4, 0, <strong><em>1</em></strong>, 32, 4, 21}。</p>
+<p>第5步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列左侧开始向右逐渐移动 i 直到找到一个比3大的元素即63，此时i=2, j=5。<br>&nbsp;&nbsp;&nbsp;&nbsp;然后把 i 指向元素赋值到 j 所在位置，此时序列变为：{-2, 1, <strong>63</strong>, 4, 0, <strong><em>63</em></strong>, 32, 4, 21}。</p>
+<p>第6步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列右侧开始向左逐渐移动 j 直到找到一个比3小的元素即0， 此时i=2, j=4。<br>&nbsp;&nbsp;&nbsp;&nbsp;然后把 j 指向元素赋值到 i 所在位置，此时序列变为：{-2, 1, <strong>0</strong>, 4, <strong><em>0</em></strong>, 63, 32, 4, 21}。</p>
+<p>第7步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列左侧开始向右逐渐移动 i 直到找到一个比3大的元素即4，此时i=3, j=4。<br>&nbsp;&nbsp;&nbsp;&nbsp;然后把 i 指向元素赋值到 j 所在位置，此时序列变为：{-2, 1, 0, <strong>4</strong>, <strong><em>4</em></strong>, 63, 32, 4, 21}。</p>
+<p>第8步：<br>&nbsp;&nbsp;&nbsp;&nbsp;从序列右侧开始向左移动 j ，于是i=j=3，将基准值赋值给i（或j）指向位置。序列变化为：{-2, 1, 0, <strong><em>3</em></strong>, 4, 63, 32, 4, 21}</p>
+<p>至此，第一趟排序结束。</p>
+<p>此时序列以基准值分为了两部分，即小于基准值3的左侧部分{-2, 1, 0}和大于基准值3的右侧部分{4, 63, 32, 4, 21}。</p>
+<p>下面再分别对序列{-2, 1, 0}和{4, 63, 32, 4, 21}按上述方法排序，详细过程不再演示。</p>
+<blockquote>
+<p>说明：序列中<strong>加粗</strong>的数字为 i 所指向元素，<strong><em>斜体加粗数字</em></strong>为 j 所指向元素，如<strong>2</strong> 和 <strong><em>-2</em></strong>。</p>
+</blockquote>
+<h1 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>最坏情况下：对于一个有n个元素的序列来说，假如基准值右侧数据均大于（或小于）基准值，那么分割后的序列只有一个且序列长度为n-1，如果每次都发生这种情况，那块快速排序就退化程了冒泡排序，时间复杂度变为了O(n^2)。</p>
+<p>理想情况下：<br>如果每次排序后都能将序列分为相等的两个部分，那么每次只需要对n/2的两个子序列进行排序。<br>在一个大小为 n 的记录中确定一个记录的位置所需要的时间为O(n)。<br>若T(n)为对n个记录进行排序所需要的时间，我们可以推导出快速排序的时间复杂度为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">T(n) &lt;= cn + 2T(n/2)    c是一个常数</div><div class="line">　　　&lt;= cn + 2(cn/2+2T(n/4)) = 2cn+ 4T(n/4)</div><div class="line">　　　&lt;= 2cn + 4(cn/4+ 2T(n/8)) = 3cn + 8T(n/8)</div><div class="line">	 &lt;= 3cn + 8(cn/8 + 2T(n/16)) = 4cn + 16T(n/16)</div><div class="line">　　　……</div><div class="line">　　　&lt;= cnlogn + nT(1) = O(nlogn)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>其中cn 是一次划分所用的时间，c是一个常数</p>
+</blockquote>
+<p>最坏的情况，每次划分都得到一个子序列，时间复杂度为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">T(n) = cn + T(n-1)</div><div class="line">	 = cn + c(n-1) + T(n - 2) = 2cn -c + T(n-2)</div><div class="line">     = 2cn -c + c(n - 2) + T(n-3) = 3cn -3c + T(n-3)</div><div class="line">　　　……</div><div class="line">　　　= c[n(n+1)/2-1] + T(1) =  O(n2)</div></pre></td></tr></table></figure>
+<h2 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h2><p>因为快速排序在进行交换时，只是根据比较基数值判断是否交换，且不是相邻元素来交换，在交换过程中可能改变相同元素的顺序，因此是一种不稳定的排序算法。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] sort(<span class="keyword">int</span>[] array, <span class="keyword">int</span> start, <span class="keyword">int</span> end) &#123;</div><div class="line">	<span class="keyword">if</span> (start &lt; <span class="number">0</span> || end &gt; array.length - <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> array;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> k = array[start];</div><div class="line">	<span class="keyword">int</span> i = start;</div><div class="line">	<span class="keyword">int</span> j = end;</div><div class="line">	<span class="keyword">while</span> (i &lt; j) &#123;</div><div class="line">		<span class="keyword">while</span> (i &lt; j) &#123;</div><div class="line">			<span class="comment">//从后往前依次查找，直到找到一个小于基准值的数</span></div><div class="line">			<span class="keyword">if</span> (k &gt; array[j]) &#123;</div><div class="line">				array[i] = array[j];</div><div class="line">				i++;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			j--;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> (i &lt; j) &#123;</div><div class="line">			<span class="comment">//从前往后依次查找，直到找到一个大于基准值的数，</span></div><div class="line">			<span class="keyword">if</span> (k &lt; array[i]) &#123;</div><div class="line">				array[j] = array[i];</div><div class="line">				j--;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			i++;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	array[i] = k;</div><div class="line">	<span class="keyword">if</span> (start &lt; i - <span class="number">1</span>) &#123;</div><div class="line">		sort(array, start, i - <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (i + <span class="number">1</span> &lt; end) &#123;</div><div class="line">		sort(array, i + <span class="number">1</span>, end);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> array;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码地址：<a href="https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/sort/QuickSort.java" target="_blank" rel="external">快速排序源码</a></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ol>
+<li><a href="http://blog.csdn.net/zyh5540/article/details/11890323" target="_blank" rel="external">面试题之——常用排序算法</a></li>
+<li><a href="https://www.cnblogs.com/surgewong/p/3381438.html" target="_blank" rel="external">快速排序</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/27/剑指offer读书笔记-二维数组查找问题/" rel="next" title="剑指offer读书笔记-二维数组查找问题">
+                <i class="fa fa-chevron-left"></i> 剑指offer读书笔记-二维数组查找问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="zhangyida" />
+          <p class="site-author-name" itemprop="name">zhangyida</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangyihao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本思想"><span class="nav-number">1.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#详细排序步骤"><span class="nav-number">2.</span> <span class="nav-text">详细排序步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序示例"><span class="nav-number">3.</span> <span class="nav-text">排序示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法特点"><span class="nav-number">4.</span> <span class="nav-text">算法特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">4.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#稳定性"><span class="nav-number">4.2.</span> <span class="nav-text">稳定性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文章"><span class="nav-number">6.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyida</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
