@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="剑指offer,算法,斐波那契," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="问题描述写一个函数，输入n，求斐波那契（Fibonacci）数列第n项。斐波那契数列定义为：f(n) = f(n-1) + f(n-2) (n&amp;gt;1) ,其中f(0)=0, f(1)=1。">
+<meta name="keywords" content="剑指offer,算法,斐波那契">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer读书笔记-面试题9-斐波那契数列问题">
+<meta property="og:url" content="http://zhangyida.cn/2018/01/23/剑指offer读书笔记-面试题9-斐波那契数列问题/index.html">
+<meta property="og:site_name" content="zhangyida">
+<meta property="og:description" content="问题描述写一个函数，输入n，求斐波那契（Fibonacci）数列第n项。斐波那契数列定义为：f(n) = f(n-1) + f(n-2) (n&amp;gt;1) ,其中f(0)=0, f(1)=1。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-24T12:31:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指offer读书笔记-面试题9-斐波那契数列问题">
+<meta name="twitter:description" content="问题描述写一个函数，输入n，求斐波那契（Fibonacci）数列第n项。斐波那契数列定义为：f(n) = f(n-1) + f(n-2) (n&amp;gt;1) ,其中f(0)=0, f(1)=1。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyida.cn/2018/01/23/剑指offer读书笔记-面试题9-斐波那契数列问题/"/>
+
+
+
+
+
+  <title>剑指offer读书笔记-面试题9-斐波那契数列问题 | zhangyida</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7ad91abbabdfc7e710d2db6b864aea29";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangyida</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyida.cn/2018/01/23/剑指offer读书笔记-面试题9-斐波那契数列问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyida">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangyida">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">剑指offer读书笔记-面试题9-斐波那契数列问题</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T15:22:42+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/剑指offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>写一个函数，输入n，求斐波那契（Fibonacci）数列第n项。<br>斐波那契数列定义为：f(n) = f(n-1) + f(n-2) (n&gt;1) ,其中f(0)=0, f(1)=1。</p>
+<a id="more"></a>
+<h1 id="递归解法"><a href="#递归解法" class="headerlink" title="递归解法"></a>递归解法</h1><p>斐波那契数列是一个典型的递归解法，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> Fibonacci(n - <span class="number">1</span>) + Fibonacci(n - <span class="number">2</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上代码虽然可以计算出第n项，但存在两个问题：</p>
+<ol>
+<li>计算f(n)时需要递归计算f(n-1)和f(n-2)，而计算f(n-1)时又要递归计算f(n-2)，f(n-2)重复递归计算，同理f(n-3)…f(2)也要重复递归计算，大大浪费了时间和空间。</li>
+<li>当n太大时，递归层次太深，耗时较长且易导致stackoverflow。</li>
+</ol>
+<h1 id="算法优化"><a href="#算法优化" class="headerlink" title="算法优化"></a>算法优化</h1><p>上面代码存在的问题是每次都进行了大量的重复递归计算，那就想办法减少这部分计算。</p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>可以通过将中间计算结果保存到数组，每次计算时都从数组中查找结果即可。例如，将中间结果保存到数组array[]中，array[n]表示第n项。那么，在计算f(n）时，首先递归计算f(n-1),在计算过程中就可以把中间结果保存到数组中，那么计算f(n-2)时，可以直接从数据中取出对应的值，不需要重复递归调用了。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>另外一种方法是从小到大的方式计算。首先根据f(0)、f(1)计算f(2), 再根据f(1)、f(2)计算f(3)，再根据f(2)、f(3)计算f(4)，依次类推，直到计算出f(n)。</p>
+<p>也就是说在每次计算中，需要保存上次计算的结果，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> f1 = <span class="number">0</span>;</div><div class="line">	<span class="keyword">int</span> f2 = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> f3 = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> f1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> f2;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (n&gt;=<span class="number">2</span>) &#123;</div><div class="line">		f3 = f1 + f2;</div><div class="line">		f1 = f2;</div><div class="line">		f2 = f3;</div><div class="line">		n--;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//用两个变量的方法，返回值需返回f2</span></div><div class="line"><span class="comment">//	while(n&gt;=2) &#123;</span></div><div class="line"><span class="comment">//		f2 = f2 + f1;</span></div><div class="line"><span class="comment">//		f1 = f2 - f1;</span></div><div class="line"><span class="comment">//		n--;</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line">	</div><div class="line">	<span class="keyword">return</span> f3;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="问题扩展：跳台阶"><a href="#问题扩展：跳台阶" class="headerlink" title="问题扩展：跳台阶"></a>问题扩展：跳台阶</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>首先从最简单的场景考虑，对于一级台阶来说，有一种跳法；对于一个二级台阶来说，有两种跳法，先跳一级在跳一级或者直接跳两级。</p>
+<p>对于一个n级台阶来说，第一跳有两种选择，先跳一个台阶或者两个台阶。若先跳一个台阶，跳法数则等于剩下n-1个台阶的跳法；若先跳两个台阶，跳法数则等于剩下n-2个台阶的跳法数。 因此，n台阶跳法数等于n-1台阶跳法数与n-2台阶跳法数之和。</p>
+<p>以此类推，n-1台阶跳法数等于n-2台阶跳法数与n-3台阶跳法数之和，n-2台阶跳法数等于n-3台阶跳法数与n-4台阶跳法数之和，…，3台阶跳法数等于2台阶跳法数与1台阶跳法数之和。</p>
+<p>因此，一个n级台阶的跳法数也可以看作是一个斐波那契数列。</p>
+<p>假设f(n)表示n级台阶的跳法，则有f(n) = f(n-1) + f(n-2) (n&gt;2)（其中，f(1)=1, f(2)=2）。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>代码和求斐波那契数列第n项大体相同，不同之处在于前两项初始值不同。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</div><div class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> f1 = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> f2 = <span class="number">2</span>;</div><div class="line">	<span class="keyword">int</span> f3 = <span class="number">1</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> f1;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (n == <span class="number">2</span>) &#123;</div><div class="line">		<span class="keyword">return</span> f2;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">while</span> (n&gt;=<span class="number">3</span>) &#123;</div><div class="line">		f3 = f1 + f2;</div><div class="line">		f1 = f2;</div><div class="line">		f2 = f3;</div><div class="line">		n--;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">return</span> f3;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="问题扩展：变态跳台阶"><a href="#问题扩展：变态跳台阶" class="headerlink" title="问题扩展：变态跳台阶"></a>问题扩展：变态跳台阶</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶总共有多少种跳法。</p>
+<h2 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h2><p>记f(n)为n级台阶跳法总数，对于一个n级台阶来说，第一跳有n种跳法。</p>
+<p>当第一跳跳1个台阶时，跳法数则为n-1级台阶跳法数即f(n-1);<br>当第一跳跳2个台阶时，跳法数则为n-2级台阶跳法数即f(n-2)；<br>当第一跳跳3个台阶时，跳法数则为n-2级台阶跳法数即f(n-3)。</p>
+<p>依此类推，则有如下公式：</p>
+<ul>
+<li>f(n) = f(n-1) + f(n-2) + f(n-3) + …. + 1。</li>
+<li>f(n-1) = f(n-2) + f(n-3) + …. + 1。</li>
+</ul>
+<p>两个公式相减可得：f(n) = 2*f(n-1)。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>根据公式，可有如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">JumpFloorII</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (n &lt; <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</div><div class="line">		<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">// f(n)=2*f(n-1)</span></div><div class="line">	<span class="keyword">int</span> f1 = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> f2 = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span> (n &gt;= <span class="number">2</span>) &#123;</div><div class="line">		f2 = <span class="number">2</span> * f1;</div><div class="line">		f1 = f2;</div><div class="line">		n--;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> f2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>根据数学归纳法可得：f(n) = 2^(n-1)。 代码可以减少为一行：return 1 &lt;&lt; (n - 1);</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/剑指offer/" rel="tag"># 剑指offer</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/斐波那契/" rel="tag"># 斐波那契</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/10/排序算法之归并排序/" rel="next" title="排序算法之归并排序">
+                <i class="fa fa-chevron-left"></i> 排序算法之归并排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="zhangyida" />
+          <p class="site-author-name" itemprop="name">zhangyida</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangyihao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#递归解法"><span class="nav-number">2.</span> <span class="nav-text">递归解法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法优化"><span class="nav-number">3.</span> <span class="nav-text">算法优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题扩展：跳台阶"><span class="nav-number">4.</span> <span class="nav-text">问题扩展：跳台阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述-1"><span class="nav-number">4.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法"><span class="nav-number">4.2.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题扩展：变态跳台阶"><span class="nav-number">5.</span> <span class="nav-text">问题扩展：变态跳台阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述-2"><span class="nav-number">5.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法-1"><span class="nav-number">5.2.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">5.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyida</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
