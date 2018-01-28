@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SSL证书," />
+  <meta name="keywords" content="右移,计算机基础," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="制作SSL证书前，需要先了解两个概念：证书（certificate）和证书请求（certificate sign rquest）   证书是自签名或CA签名过的凭据，用来进行身份认证。 证书请求是对签名的请求，需要使用私钥进行签名。   1. 生成CA证书第一步，生成 CA 私钥： 1[root@py ssl_test]# openssl genrsa -out ca.key 1024  ca.k">
-<meta name="keywords" content="SSL证书">
+<meta name="description" content="概念右移运算符是将一个二进制数按指定移动的位数向右移动。 移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。 补码在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。   正数的补码是原码自身。 负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1">
+<meta name="keywords" content="右移,计算机基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用OpenSSL制作SSL证书">
-<meta property="og:url" content="http://zhangyida.cn/2017/12/13/使用OpenSSL制作SSL证书/index.html">
+<meta property="og:title" content="右移运算符总结">
+<meta property="og:url" content="http://zhangyida.cn/2018/01/26/右移运算符总结/index.html">
 <meta property="og:site_name" content="zhangyida">
-<meta property="og:description" content="制作SSL证书前，需要先了解两个概念：证书（certificate）和证书请求（certificate sign rquest）   证书是自签名或CA签名过的凭据，用来进行身份认证。 证书请求是对签名的请求，需要使用私钥进行签名。   1. 生成CA证书第一步，生成 CA 私钥： 1[root@py ssl_test]# openssl genrsa -out ca.key 1024  ca.k">
+<meta property="og:description" content="概念右移运算符是将一个二进制数按指定移动的位数向右移动。 移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。 补码在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。   正数的补码是原码自身。 负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-13T14:32:46.000Z">
+<meta property="og:updated_time" content="2018-01-28T10:12:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用OpenSSL制作SSL证书">
-<meta name="twitter:description" content="制作SSL证书前，需要先了解两个概念：证书（certificate）和证书请求（certificate sign rquest）   证书是自签名或CA签名过的凭据，用来进行身份认证。 证书请求是对签名的请求，需要使用私钥进行签名。   1. 生成CA证书第一步，生成 CA 私钥： 1[root@py ssl_test]# openssl genrsa -out ca.key 1024  ca.k">
+<meta name="twitter:title" content="右移运算符总结">
+<meta name="twitter:description" content="概念右移运算符是将一个二进制数按指定移动的位数向右移动。 移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。 补码在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。   正数的补码是原码自身。 负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangyida.cn/2017/12/13/使用OpenSSL制作SSL证书/"/>
+  <link rel="canonical" href="http://zhangyida.cn/2018/01/26/右移运算符总结/"/>
 
 
 
 
 
-  <title>使用OpenSSL制作SSL证书 | zhangyida</title>
+  <title>右移运算符总结 | zhangyida</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhangyida.cn/2017/12/13/使用OpenSSL制作SSL证书/">
+    <link itemprop="mainEntityOfPage" href="http://zhangyida.cn/2018/01/26/右移运算符总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangyida">
@@ -300,7 +300,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">使用OpenSSL制作SSL证书</h2>
+          <h2 class="post-title" itemprop="name headline">右移运算符总结</h2>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-13T21:57:17+08:00">
-                2017-12-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-26T11:00:30+08:00">
+                2018-01-26
               </time>
             
 
@@ -335,8 +335,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全认证/" itemprop="url" rel="index">
-                    <span itemprop="name">安全认证</span>
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
                   </a>
                 </span>
 
@@ -370,46 +370,129 @@
       
 
       
-        <p>制作SSL证书前，需要先了解两个概念：证书（certificate）和证书请求（certificate sign rquest）</p>
-<blockquote>
-<ol>
-<li>证书是自签名或CA签名过的凭据，用来进行身份认证。</li>
-<li>证书请求是对签名的请求，需要使用私钥进行签名。</li>
-</ol>
-</blockquote>
-<h2 id="1-生成CA证书"><a href="#1-生成CA证书" class="headerlink" title="1. 生成CA证书"></a>1. 生成CA证书</h2><p>第一步，生成 CA 私钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@py ssl_test]# openssl genrsa -out ca.key 1024</div></pre></td></tr></table></figure>
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>右移运算符是将一个二进制数按指定移动的位数向右移动。</p>
+<p>移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。</p>
+<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。 </p>
 <ul>
-<li>ca.key 为私钥文件名;</li>
-<li>1024为密钥长度，单位为bits，不写即为默认值为512。<br><em>openssl genrsa</em> 命令详细参数可参考维基百科：<a href="https://wiki.openssl.org/index.php/Manual:Genrsa(1" target="_blank" rel="external">https://wiki.openssl.org/index.php/Manual:Genrsa(1</a>)</li>
+<li>正数的补码是原码自身。</li>
+<li>负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1</li>
 </ul>
 <a id="more"></a>
-<p>第二步，生成证书请求即 Certificate Signing Request (CSR)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">[root@py ssl_test]# openssl req -new -key ca.key -out ca.csr</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter &apos;.&apos;, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [XX]:BJ</div><div class="line">State or Province Name (full name) []:beijing</div><div class="line">Locality Name (eg, city) [Default City]:beijing</div><div class="line">Organization Name (eg, company) [Default Company Ltd]:MYCA</div><div class="line">Organizational Unit Name (eg, section) []:ca</div><div class="line">Common Name (eg, your name or your server&apos;s hostname) []:ca</div><div class="line">Email Address []:</div><div class="line"></div><div class="line">Please enter the following &apos;extra&apos; attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:123456</div><div class="line">An optional company name []:</div></pre></td></tr></table></figure>
-<p>填写上边信息时需要注意：</p>
-<ul>
-<li><em>-key</em> 参数指定了私钥文件，即第一步生成的文件。</li>
-<li><em>Organization Name (eg, company) [Default Company Ltd]:</em> 需要填写单位组织名称，后面生成客户端和服务器端证书的时候也需要填写，不要写成一样的，可以随意写程：MyCA, MyServer, MyClient等，区别开即可。</li>
-<li><em>Common Name (eg, your name or your server’s hostname) []</em> ：在生成服务器请求证书时，此处需要填写为服务器ip地址或域名；此时生成的为CA请求证书，可以随意填写。</li>
-<li>以上填写信息，可通过 <em>-subj</em> 参数指定 或这 <em>-batch</em>参数读取配置文件。 </li>
-</ul>
-<p><em>openssl req</em> 命令详细参数可参考维基百科：<a href="https://wiki.openssl.org/index.php/Manual:Req(1" target="_blank" rel="external">https://wiki.openssl.org/index.php/Manual:Req(1</a>)</p>
-<p>第三步，生成证书 Certificate（CRT）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@py ssl_test]# openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt</div></pre></td></tr></table></figure>
-<ul>
-<li><em>-days</em> 参数指定了证书有效期，单位为天，默认为30天。 </li>
-<li><em>-in</em> 指定输入文件，即证书请求文件。</li>
-<li><em>-signkey</em> 自签名证书需要的私钥文件。<br>命令详细参数可参考维基百科：<a href="https://wiki.openssl.org/index.php/Command_Line_Utilities" target="_blank" rel="external">https://wiki.openssl.org/index.php/Command_Line_Utilities</a></li>
-</ul>
-<h2 id="2-生成服务器端证书"><a href="#2-生成服务器端证书" class="headerlink" title="2. 生成服务器端证书"></a>2. 生成服务器端证书</h2><p>第一步，生成服务器端公钥、私钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">生成服务器私钥：</div><div class="line">[root@py ssl_test]# openssl genrsa -out server.key 1024</div><div class="line">生成服务器公钥：</div><div class="line">[root@py ssl_test]# openssl rsa -in server.key -pubout -out server.pem</div></pre></td></tr></table></figure>
-<p>第二步，生成服务器端证书请求文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@py ssl_test]# openssl req -new -key server.key -out server.csr</div></pre></td></tr></table></figure>
-<p>注意，此时 <em>Common Name</em> 要填写服务器的ip地址或域名地址。</p>
-<p>第三步，向CA机构申请证书<br>在这一步，CA机构使用CA的证书和私钥，对请求的服务器请求证书进行签名，最后生成一个带有CA签名的证书。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@py ssl_test]# openssl x509 -req -days 365 -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt</div></pre></td></tr></table></figure>
-<h2 id="3-生成客户端证书"><a href="#3-生成客户端证书" class="headerlink" title="3. 生成客户端证书"></a>3. 生成客户端证书</h2><p>生成方式及命令，参考上边生成服务端证书部分。</p>
-<h3 id="将客户端证书文件转换为p12格式证书文件"><a href="#将客户端证书文件转换为p12格式证书文件" class="headerlink" title="将客户端证书文件转换为p12格式证书文件"></a>将客户端证书文件转换为p12格式证书文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@py ssl_test]# openssl pkcs12 -export -clcerts -in client.crt -inkey client.key -out clien.p12</div></pre></td></tr></table></figure>
+<h3 id="补码计算示例"><a href="#补码计算示例" class="headerlink" title="补码计算示例"></a>补码计算示例</h3><p>以计算十进制-100的补码为例，计算过程为：</p>
+<p>-100的原码：10000000 00000000 00000000 01100100<br>符号位保持不变，取反：11111111 11111111 11111111 10011011<br>加1后，-100补码为：11111111 11111111 11111111 10011100</p>
+<h1 id="右移运算"><a href="#右移运算" class="headerlink" title="右移运算"></a>右移运算</h1><blockquote>
+<p>下面右移都是以整数为例，不考虑小数情况。</p>
+</blockquote>
+<h2 id="正数右移"><a href="#正数右移" class="headerlink" title="正数右移"></a>正数右移</h2><p>正数右移高位需补0，以100右移4位为例：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>二进制</th>
+<th>对应十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>补码</td>
+<td>00000000 00000000 00000000 01100100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>右移4位</td>
+<td>00000000 00000000 00000000 00000110</td>
+<td>6</td>
+</tr>
+<tr>
+<td>源码</td>
+<td>00000000 00000000 00000000 00000110</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>最后可得: 100 &gt;&gt; 4 = 6</p>
+<blockquote>
+<p>正数的右移相当于除法，右移几位就除以2的几次方，如100&gt;&gt;4 等效 100/2^4</p>
+</blockquote>
+<h2 id="负数右移"><a href="#负数右移" class="headerlink" title="负数右移"></a>负数右移</h2><p>负数右移高位需补1，以-100右移4位为例：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>二进制</th>
+<th>对应十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原码</td>
+<td>10000000 00000000 00000000 01100100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>转换为补码</td>
+<td>11111111 11111111 11111111 10011100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>右移4位，高位补1</td>
+<td>11111111 11111111 11111111 11111001</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>保留符号位，按位取反</td>
+<td>10000000 00000000 00000000 00000110</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>加1后转为源码</td>
+<td>10000000 00000000 00000000 00000111</td>
+<td>-7</td>
+</tr>
+</tbody>
+</table>
+<p>最后可得： -100 &gt;&gt; 4 = -7</p>
+<blockquote>
+<p>负数的右移不等于除法，即负数右移不能按除以2的n次方计算（n表示移动位数）。</p>
+</blockquote>
+<h2 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h2><p>无符号右移和正数右移相同，都是高位补0，以-100右移4位为例：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>二进制</th>
+<th>对应十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原码</td>
+<td>10000000 00000000 00000000 01100100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>转换为补码</td>
+<td>11111111 11111111 11111111 10011100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>右移4位，高位补0</td>
+<td>00001111 11111111 11111111 11111001</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>转为原码</td>
+<td>00001111 11111111 11111111 11111001</td>
+<td>268435449</td>
+</tr>
+</tbody>
+</table>
+<p>最后可得： -100 &gt;&gt;&gt; 4 = 268435449</p>
+<blockquote>
+<p>右移28位后，最高位为0表示正数，所以原码即为补码本身。<br>“&gt;&gt;&gt;”是Java里的无符号右移操作符。</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>正数的右移，负数的无符号右移，就是相应的补码移位所得，在高位补0即可。<br>负数的右移，就是补码高位补1,然后按位取反加1即可。</p>
+
       
     </div>
     
@@ -426,7 +509,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SSL证书/" rel="tag"># SSL证书</a>
+            <a href="/tags/右移/" rel="tag"># 右移</a>
+          
+            <a href="/tags/计算机基础/" rel="tag"># 计算机基础</a>
           
         </div>
       
@@ -439,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/18/Android 虚拟设备检测/" rel="next" title="Android 虚拟设备检测">
-                <i class="fa fa-chevron-left"></i> Android 虚拟设备检测
+              <a href="/2018/01/25/剑指offer读书笔记-面试题8-旋转数组的最小数字/" rel="next" title="剑指offer读书笔记-面试题8-旋转数组的最小数字">
+                <i class="fa fa-chevron-left"></i> 剑指offer读书笔记-面试题8-旋转数组的最小数字
               </a>
             
           </div>
@@ -448,10 +533,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/13/Android HTTPS 双向认证实现/" rel="prev" title="Android HTTPS 双向认证实现">
-                Android HTTPS 双向认证实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -594,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-生成CA证书"><span class="nav-number">1.</span> <span class="nav-text">1. 生成CA证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-生成服务器端证书"><span class="nav-number">2.</span> <span class="nav-text">2. 生成服务器端证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-生成客户端证书"><span class="nav-number">3.</span> <span class="nav-text">3. 生成客户端证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将客户端证书文件转换为p12格式证书文件"><span class="nav-number">3.1.</span> <span class="nav-text">将客户端证书文件转换为p12格式证书文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补码"><span class="nav-number">2.</span> <span class="nav-text">补码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补码计算示例"><span class="nav-number">2.0.1.</span> <span class="nav-text">补码计算示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右移运算"><span class="nav-number">3.</span> <span class="nav-text">右移运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正数右移"><span class="nav-number">3.1.</span> <span class="nav-text">正数右移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负数右移"><span class="nav-number">3.2.</span> <span class="nav-text">负数右移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号右移"><span class="nav-number">3.3.</span> <span class="nav-text">无符号右移</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
