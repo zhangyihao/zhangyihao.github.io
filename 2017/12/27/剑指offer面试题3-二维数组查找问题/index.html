@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="算法,剑指offer,查询,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="问题描述在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。">
+<meta name="keywords" content="算法,剑指offer,查询">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer面试题3-二维数组查找问题">
+<meta property="og:url" content="http://zhangyihao.github.io/2017/12/27/剑指offer面试题3-二维数组查找问题/index.html">
+<meta property="og:site_name" content="zhangyihao">
+<meta property="og:description" content="问题描述在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhangyihao.github.io/illustrations/201712/2017120001.png">
+<meta property="og:updated_time" content="2018-02-01T14:37:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指offer面试题3-二维数组查找问题">
+<meta name="twitter:description" content="问题描述在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。">
+<meta name="twitter:image" content="http://zhangyihao.github.io/illustrations/201712/2017120001.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyihao.github.io/2017/12/27/剑指offer面试题3-二维数组查找问题/">
+
+
+
+
+
+  <title>剑指offer面试题3-二维数组查找问题 | zhangyihao</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7ad91abbabdfc7e710d2db6b864aea29";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangyihao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyihao.github.io/2017/12/27/剑指offer面试题3-二维数组查找问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyihao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangyihao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">剑指offer面试题3-二维数组查找问题</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T17:28:42+08:00">
+                2017-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/剑指offer/" itemprop="url" rel="index">
+                    <span itemprop="name">剑指offer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。<br>请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<a id="more"></a>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><h2 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h2><p>暴力破解方式也就是对二维数组中的每个元素逐个检查，结束条件为找到和目标值相等的元素或者查询到最后一个元素。</p>
+<p>对于一个行列数都为n的二维数组而言，最坏的情况是将整个数组遍历完，这种情况下时间复杂度为O(n^2)，并不是一个好的解决方法。</p>
+<h2 id="优化解法"><a href="#优化解法" class="headerlink" title="优化解法"></a>优化解法</h2><p>假设，有一个5*5的二维数组，待查找元素为18，数组如下图所示：</p>
+<p><img src="/illustrations/201712/2017120001.png"></p>
+<h3 id="查找步骤"><a href="#查找步骤" class="headerlink" title="查找步骤"></a>查找步骤</h3><p>视整个数组为待查找区域，对于数组右上角（即行1列5）的元素20，我们可以有以下结论：</p>
+<ul>
+<li>20所在行左侧数据（图示中黄色部分）均小于20</li>
+<li>20所在列下方数据（图示中蓝色部分）均大于20</li>
+<li>20所在位置的左下角部分（图示中灰色部分）数据和20大小关系未知。</li>
+</ul>
+<p>因此对于任意待查找元素，可以知道：</p>
+<ol>
+<li>如果待查找元素和当前元素（即20）相等，则数组中包含待查找元素，查找结束。</li>
+<li>如果待查找元素小于当前元素（即20），则下一步中待查找区域变为图中黄色部分加灰色部分。</li>
+<li>如果待查找元素大于当前元素（即20），则下一步中待查找区域变为图中蓝色部分加灰色部分。 </li>
+</ol>
+<p>详细步骤为：</p>
+<ul>
+<li>第一步：从待查找区域中取出右上角（即行1列5）元素20。18小于20，待查找区域变为图中黄色加灰色区域，即1&lt;=行号&lt;=5且1&lt;=列号&lt;=4的区域。</li>
+<li>第二步：从待查找区域中取出右上角（即行1列4）元素13。13小于18，待查找区域变为图中灰色区域，即2&lt;=行号&lt;=5、1&lt;=列号&lt;=4的区域。</li>
+<li>第三步：从待查找区域中取出右上角（即行2列4）元素18,18等于18，查找结束。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总体思路为：每次取待查找区域右上角元素，然后将待查找区域分为两部分，即新的待查找区域和大于（或小于）当前元素区域。然后一直重复上述操作，直到找到待查找元素或左下角元素。</p>
+<p>同样，也可以每次选取待查找区域左下角的元素，然后根据相应规则确定新的待查找区域，此处就不再详细说明。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>每次从待查找区域中选取右上角元素写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> target, <span class="keyword">int</span>[][] array)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(array == <span class="keyword">null</span> || array.length == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> rowLength = array.length;</span><br><span class="line">	<span class="keyword">int</span> colLength = array[<span class="number">0</span>].length;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">boolean</span> find = <span class="keyword">false</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> col=colLength-<span class="number">1</span>, row=<span class="number">0</span>; col&gt;=<span class="number">0</span> &amp;&amp; row&lt;rowLength;) &#123;</span><br><span class="line">		<span class="keyword">int</span> num = array[row][col];</span><br><span class="line">		<span class="keyword">if</span>(num == target) &#123;</span><br><span class="line">			find = <span class="keyword">true</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> (num&lt;target) &#123;</span><br><span class="line">			row++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			col--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> find;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每次从待查找区域中选取左下角元素写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> target, <span class="keyword">int</span>[][] array)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(array == <span class="keyword">null</span> || array.length == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> rowLength = array.length;</span><br><span class="line">	<span class="keyword">int</span> colLength = array[<span class="number">0</span>].length;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">boolean</span> find = <span class="keyword">false</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> col=<span class="number">0</span>, row=rowLength-<span class="number">1</span>; col&lt;colLength &amp;&amp; row&gt;=<span class="number">0</span>;) &#123;</span><br><span class="line">		<span class="keyword">int</span> num = array[row][col];</span><br><span class="line">		<span class="keyword">if</span>(num == target) &#123;</span><br><span class="line">			find = <span class="keyword">true</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &lt; target) &#123;</span><br><span class="line">			col++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			row--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> find;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码地址：<br><a href="https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/offer/Question3.java" target="_blank" rel="noopener">https://github.com/zhangyihao/Algorithms/blob/master/com.zhangyihao.algorithms/src/com/zhangyihao/algorithms/offer/Question3.java</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/剑指offer/" rel="tag"># 剑指offer</a>
+          
+            <a href="/tags/查询/" rel="tag"># 查询</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/26/排序算法之冒泡排序/" rel="next" title="排序算法之冒泡排序">
+                <i class="fa fa-chevron-left"></i> 排序算法之冒泡排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/29/排序算法之快速排序/" rel="prev" title="排序算法之快速排序">
+                排序算法之快速排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangyihao">
+          <p class="site-author-name" itemprop="name">zhangyihao</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangyihao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力破解"><span class="nav-number">2.1.</span> <span class="nav-text">暴力破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化解法"><span class="nav-number">2.2.</span> <span class="nav-text">优化解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查找步骤"><span class="nav-number">2.2.1.</span> <span class="nav-text">查找步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.2.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyihao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Android,虚拟设备,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="在做App时遇到这么一个需求：要求App在启动的时候检测当前运行设备是否为虚拟设备，如果为虚拟设备则App停止运行并退出。通过网络上搜集的资料，总结了以下检测方法。">
+<meta name="keywords" content="Android,虚拟设备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 虚拟设备检测">
+<meta property="og:url" content="http://zhangyihao.github.io/2017/10/18/Android 虚拟设备检测/index.html">
+<meta property="og:site_name" content="zhangyihao">
+<meta property="og:description" content="在做App时遇到这么一个需求：要求App在启动的时候检测当前运行设备是否为虚拟设备，如果为虚拟设备则App停止运行并退出。通过网络上搜集的资料，总结了以下检测方法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-17T14:42:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 虚拟设备检测">
+<meta name="twitter:description" content="在做App时遇到这么一个需求：要求App在启动的时候检测当前运行设备是否为虚拟设备，如果为虚拟设备则App停止运行并退出。通过网络上搜集的资料，总结了以下检测方法。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyihao.github.io/2017/10/18/Android 虚拟设备检测/">
+
+
+
+
+
+  <title>Android 虚拟设备检测 | zhangyihao</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7ad91abbabdfc7e710d2db6b864aea29";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangyihao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyihao.github.io/2017/10/18/Android 虚拟设备检测/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyihao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangyihao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android 虚拟设备检测</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-18T22:00:00+08:00">
+                2017-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在做App时遇到这么一个需求：要求App在启动的时候检测当前运行设备是否为虚拟设备，如果为虚拟设备则App停止运行并退出。通过网络上搜集的资料，总结了以下检测方法。</p>
+<a id="more"></a>
+<h1 id="基于固定数据检测"><a href="#基于固定数据检测" class="headerlink" title="基于固定数据检测"></a>基于固定数据检测</h1><p>虚拟机设备的ID、IMID一般都为固定值，检测到这些信息为默认值即可判定为虚拟设备。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String[] imeis = &#123;<span class="string">"000000000000000"</span>&#125;;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String[] imsiIds = &#123;<span class="string">"310260000000000"</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isEmulatorByImei</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">       TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);  </span><br><span class="line">       String imei = tm.getDeviceId();</span><br><span class="line">       String imsiID =tm.getSubscriberId();</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">for</span> (String knowDeviceid : imeis) &#123;</span><br><span class="line">           <span class="keyword">if</span> (knowDeviceid.equalsIgnoreCase(imei)) &#123;</span><br><span class="line">               Log.v(TAG, <span class="string">"Find device id: "</span>+knowDeviceid);</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">for</span> (String knowImsiId : imsiIds) &#123;</span><br><span class="line">           <span class="keyword">if</span> (knowImsiId.equalsIgnoreCase(imsiID)) &#123;</span><br><span class="line">               Log.v(TAG, <span class="string">"Find imis id: "</span>+knowImsiId);</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;  </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>除了以上数据检测外，还可以检测设备的默认手机号码，下面是网上给出的默认手机号码（不推荐这种方法，这些手机号码有可能是真实的）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String[] known_numbers = &#123; <span class="string">"15555215554"</span>, <span class="string">"15555215556"</span>,</span><br><span class="line">        <span class="string">"15555215558"</span>, <span class="string">"15555215560"</span>, <span class="string">"15555215562"</span>, <span class="string">"15555215564"</span>,</span><br><span class="line">        <span class="string">"15555215566"</span>, <span class="string">"15555215568"</span>, <span class="string">"15555215570"</span>, <span class="string">"15555215572"</span>,</span><br><span class="line">        <span class="string">"15555215574"</span>, <span class="string">"15555215576"</span>, <span class="string">"15555215578"</span>, <span class="string">"15555215580"</span>,</span><br><span class="line">        <span class="string">"15555215582"</span>, <span class="string">"15555215584"</span>, &#125;;</span><br></pre></td></tr></table></figure>
+<p>以上通过系统API获取并不准确，毕竟可以通过修改源码或者通过攻击修改信息。</p>
+<h1 id="基于硬件信息检测"><a href="#基于硬件信息检测" class="headerlink" title="基于硬件信息检测"></a>基于硬件信息检测</h1><p>通过检测设备的手机型号，可以简单判断设备是否为虚拟设备。如Google官方虚拟机的设备型号为google_sdk或sdk。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkEmulatorBuild</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       String model = android.os.Build.MODEL;</span><br><span class="line">       <span class="keyword">if</span> (model.equalsIgnoreCase(<span class="string">"google_sdk"</span>) || model.equalsIgnoreCase(<span class="string">"sdk"</span>)) &#123;</span><br><span class="line">           Log.v(TAG, <span class="string">"Find build modle is "</span>+model);</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>除了检测手机型号外，还可以检测下真机独有的硬件设备，如GPS、蓝牙、温度传感器等。</p>
+<h1 id="虚拟设备特有文件"><a href="#虚拟设备特有文件" class="headerlink" title="虚拟设备特有文件"></a>虚拟设备特有文件</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String[] known_files = &#123;<span class="string">"/system/lib/libc_malloc_debug_qemu.so"</span>,<span class="string">"/sys/qemu_trace"</span>,<span class="string">"/system/bin/qemu-props"</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkEmulatorFiles</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//检测模拟器上特有的几个文件</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; known_files.length; i++) &#123;</span><br><span class="line">           String fileName = known_files[i];</span><br><span class="line">           File qemuFile = <span class="keyword">new</span> File(fileName);</span><br><span class="line">           <span class="keyword">if</span> (qemuFile.exists()) &#123;</span><br><span class="line">               Log.v(TAG, <span class="string">"Find Emulator Files!"</span>);</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="虚拟机驱动文件检测"><a href="#虚拟机驱动文件检测" class="headerlink" title="虚拟机驱动文件检测"></a>虚拟机驱动文件检测</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String[] known_qemu_drivers = &#123;<span class="string">"goldfish"</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkQEmuDriverFile</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       File driverFile = <span class="keyword">new</span> File(<span class="string">"/proc/tty/drivers"</span>);</span><br><span class="line">       <span class="keyword">if</span> (driverFile.exists() &amp;&amp; driverFile.canRead()) &#123;</span><br><span class="line">           <span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">               InputStream inStream = <span class="keyword">new</span> FileInputStream(driverFile);</span><br><span class="line">               inStream.read(data);</span><br><span class="line">               inStream.close();</span><br><span class="line">           &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           &#125;</span><br><span class="line">           String driverData = <span class="keyword">new</span> String(data);</span><br><span class="line">           <span class="keyword">for</span> (String knownQemuDriver : known_qemu_drivers) &#123;</span><br><span class="line">               <span class="keyword">if</span> (driverData.indexOf(knownQemuDriver) != -<span class="number">1</span>) &#123;</span><br><span class="line">                   Log.i(TAG, <span class="string">"Find know_qemu_drivers!"</span>);</span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>以上方法可以检测出大部分的虚拟设备，但并不是万能的，需要根据不同场景组合不同的方法组合进行判定。</p>
+<p>附源码地址：<br><a href="https://github.com/zhangyihao/AndroidSSL/edit/master/AndroidSSL/src/com/zhangyida/util/VirtualDeviceUtil.java" target="_blank" rel="noopener">https://github.com/zhangyihao/AndroidSSL/edit/master/AndroidSSL/src/com/zhangyida/util/VirtualDeviceUtil.java</a></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><ol>
+<li><a href="https://www.cnblogs.com/qishuai/p/5756209.html" target="_blank" rel="noopener">Android模拟器检测常用方法</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/虚拟设备/" rel="tag"># 虚拟设备</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/16/Double-Checkd Locking is Broken/" rel="next" title="(转)The Double-Checked Locking is Broken Declaration">
+                <i class="fa fa-chevron-left"></i> (转)The Double-Checked Locking is Broken Declaration
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/使用OpenSSL制作SSL证书/" rel="prev" title="使用OpenSSL制作SSL证书">
+                使用OpenSSL制作SSL证书 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangyihao">
+          <p class="site-author-name" itemprop="name">zhangyihao</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangyihao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于固定数据检测"><span class="nav-number">1.</span> <span class="nav-text">基于固定数据检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于硬件信息检测"><span class="nav-number">2.</span> <span class="nav-text">基于硬件信息检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟设备特有文件"><span class="nav-number">3.</span> <span class="nav-text">虚拟设备特有文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机驱动文件检测"><span class="nav-number">4.</span> <span class="nav-text">虚拟机驱动文件检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文章"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyihao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

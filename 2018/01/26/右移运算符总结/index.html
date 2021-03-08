@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="右移,计算机基础,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="概念右移运算符是将一个二进制数按指定移动的位数向右移动。 移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。 补码在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。   正数的补码是原码自身。 负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1">
+<meta name="keywords" content="右移,计算机基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="右移运算符总结">
+<meta property="og:url" content="http://zhangyihao.github.io/2018/01/26/右移运算符总结/index.html">
+<meta property="og:site_name" content="zhangyihao">
+<meta property="og:description" content="概念右移运算符是将一个二进制数按指定移动的位数向右移动。 移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。 补码在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。   正数的补码是原码自身。 负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-28T10:12:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="右移运算符总结">
+<meta name="twitter:description" content="概念右移运算符是将一个二进制数按指定移动的位数向右移动。 移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。 补码在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。   正数的补码是原码自身。 负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyihao.github.io/2018/01/26/右移运算符总结/">
+
+
+
+
+
+  <title>右移运算符总结 | zhangyihao</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7ad91abbabdfc7e710d2db6b864aea29";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangyihao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyihao.github.io/2018/01/26/右移运算符总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangyihao">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangyihao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">右移运算符总结</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-26T11:00:30+08:00">
+                2018-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>右移运算符是将一个二进制数按指定移动的位数向右移动。</p>
+<p>移动过程中，正数最高位补0，负数最高位补1，无符号数最高位补0。</p>
+<h1 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h1><p>在计算机系统中，数值一律用补码来表示和存储，其中最高位表示符号位，1表示负数，0表示正数。 </p>
+<ul>
+<li>正数的补码是原码自身。</li>
+<li>负数补码是通过原码计算得到，计算过程为：符号位不变，其余位按照原码取反加1</li>
+</ul>
+<a id="more"></a>
+<h3 id="补码计算示例"><a href="#补码计算示例" class="headerlink" title="补码计算示例"></a>补码计算示例</h3><p>以计算十进制-100的补码为例，计算过程为：</p>
+<p>-100的原码：10000000 00000000 00000000 01100100<br>符号位保持不变，取反：11111111 11111111 11111111 10011011<br>加1后，-100补码为：11111111 11111111 11111111 10011100</p>
+<h1 id="右移运算"><a href="#右移运算" class="headerlink" title="右移运算"></a>右移运算</h1><blockquote>
+<p>下面右移都是以整数为例，不考虑小数情况。</p>
+</blockquote>
+<h2 id="正数右移"><a href="#正数右移" class="headerlink" title="正数右移"></a>正数右移</h2><p>正数右移高位需补0，以100右移4位为例：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>二进制</th>
+<th>对应十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>补码</td>
+<td>00000000 00000000 00000000 01100100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>右移4位</td>
+<td>00000000 00000000 00000000 00000110</td>
+<td>6</td>
+</tr>
+<tr>
+<td>源码</td>
+<td>00000000 00000000 00000000 00000110</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>最后可得: 100 &gt;&gt; 4 = 6</p>
+<blockquote>
+<p>正数的右移相当于除法，右移几位就除以2的几次方，如100&gt;&gt;4 等效 100/2^4</p>
+</blockquote>
+<h2 id="负数右移"><a href="#负数右移" class="headerlink" title="负数右移"></a>负数右移</h2><p>负数右移高位需补1，以-100右移4位为例：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>二进制</th>
+<th>对应十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原码</td>
+<td>10000000 00000000 00000000 01100100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>转换为补码</td>
+<td>11111111 11111111 11111111 10011100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>右移4位，高位补1</td>
+<td>11111111 11111111 11111111 11111001</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>保留符号位，按位取反</td>
+<td>10000000 00000000 00000000 00000110</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>加1后转为源码</td>
+<td>10000000 00000000 00000000 00000111</td>
+<td>-7</td>
+</tr>
+</tbody>
+</table>
+<p>最后可得： -100 &gt;&gt; 4 = -7</p>
+<blockquote>
+<p>负数的右移不等于除法，即负数右移不能按除以2的n次方计算（n表示移动位数）。</p>
+</blockquote>
+<h2 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h2><p>无符号右移和正数右移相同，都是高位补0，以-100右移4位为例：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>二进制</th>
+<th>对应十进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原码</td>
+<td>10000000 00000000 00000000 01100100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>转换为补码</td>
+<td>11111111 11111111 11111111 10011100</td>
+<td>-100</td>
+</tr>
+<tr>
+<td>右移4位，高位补0</td>
+<td>00001111 11111111 11111111 11111001</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>转为原码</td>
+<td>00001111 11111111 11111111 11111001</td>
+<td>268435449</td>
+</tr>
+</tbody>
+</table>
+<p>最后可得： -100 &gt;&gt;&gt; 4 = 268435449</p>
+<blockquote>
+<p>右移28位后，最高位为0表示正数，所以原码即为补码本身。<br>“&gt;&gt;&gt;”是Java里的无符号右移操作符。</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>正数的右移，负数的无符号右移，就是相应的补码移位所得，在高位补0即可。<br>负数的右移，就是补码高位补1,然后按位取反加1即可。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/右移/" rel="tag"># 右移</a>
+          
+            <a href="/tags/计算机基础/" rel="tag"># 计算机基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/25/剑指offer面试题8-旋转数组的最小数字/" rel="next" title="剑指offer面试题8-旋转数组的最小数字">
+                <i class="fa fa-chevron-left"></i> 剑指offer面试题8-旋转数组的最小数字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/26/剑指offer面试题10-二进制中1的个数/" rel="prev" title="剑指offer面试题10-二进制中1的个数">
+                剑指offer面试题10-二进制中1的个数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangyihao">
+          <p class="site-author-name" itemprop="name">zhangyihao</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhangyihao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补码"><span class="nav-number">2.</span> <span class="nav-text">补码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补码计算示例"><span class="nav-number">2.0.1.</span> <span class="nav-text">补码计算示例</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#右移运算"><span class="nav-number">3.</span> <span class="nav-text">右移运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正数右移"><span class="nav-number">3.1.</span> <span class="nav-text">正数右移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负数右移"><span class="nav-number">3.2.</span> <span class="nav-text">负数右移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号右移"><span class="nav-number">3.3.</span> <span class="nav-text">无符号右移</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangyihao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
